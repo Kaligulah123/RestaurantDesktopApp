@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="RestaurantDesktopApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:RestaurantDesktopApp"
+    xmlns:views="clr-namespace:RestaurantDesktopApp.MVVM.Views"
+    Title="RestaurantDesktopApp"
+    Shell.FlyoutBackgroundColor="Wheat"
+    Shell.FlyoutBehavior="Locked"
+    Shell.FlyoutWidth="60">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Icon="home_regular_24.png"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Orders"
+        ContentTemplate="{DataTemplate views:OrdersView}"
+        Icon="list_ul_regular_24.png"
+        Route="Orders" />
+
+    <ShellContent
+        Title="ManageMenuItem"
+        ContentTemplate="{DataTemplate views:ManageMenuItemView}"
+        Icon="grid_alt_regular_24.png"
+        Route="ManageMenuItem" />
+
+    <Shell.FlyoutFooter>
+        <Image Source="phone_solid_24.png"
+               HeightRequest="20"
+               WidthRequest="20"
+               HorizontalOptions="Center"
+               Aspect="AspectFit"
+               Margin="0,0,0,25"/>
+    </Shell.FlyoutFooter>
+
+</Shell>
