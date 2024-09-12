@@ -8,7 +8,7 @@
     xmlns:models="clr-namespace:RestaurantDesktopApp.MVVM.Models"
     xmlns:viewmodels="clr-namespace:RestaurantDesktopApp.MVVM.ViewModels"
     x:DataType="viewmodels:MainPageViewModel"
-    Shell.NavBarIsVisible="False">    
+    Shell.NavBarIsVisible="False">
 
     <Grid ColumnDefinitions=".75*, .25*">
 
@@ -16,7 +16,8 @@
             Grid.Column="0"
             Padding="15"
             RowDefinitions="Auto, Auto, *"
-            RowSpacing="15">
+            RowSpacing="15"
+            BackgroundColor="White">
             <Label
                 Grid.Row="0"
                 FontAttributes="Bold"
@@ -26,7 +27,7 @@
             <controls:CategoriesListControl
                 Grid.Row="1"
                 Categories="{Binding Categories}"
-                OnCategorySelected="CategoriesListControl_OnCategorySelected" />
+                OnCategorySelected="CategoriesListControl_OnCategorySelected" MaximumHeightRequest="40"/>
 
             <Grid Grid.Row="2">
 
@@ -69,6 +70,13 @@
                 Grid.Row="1"
                 Padding="10"
                 BackgroundColor="Wheat">
+                <Label
+                    x:Name="MessageLabel"
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Opacity="0"
+                    Text="¡Pedido Realizado!"
+                    VerticalOptions="Center" />
                 <CollectionView ItemsSource="{Binding CartItems}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="2" Orientation="Vertical" />
@@ -185,12 +193,12 @@
                         RowSpacing="8">
                         <Label
                             Grid.Row="0"
-                            Grid.Column="0"                           
+                            Grid.Column="0"
                             Text="Base Imponible" />
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="End"
                             Text="{Binding Subtotal, StringFormat='{0:C}'}" />
                         <HorizontalStackLayout
                             Grid.Row="1"
@@ -211,32 +219,52 @@
                         <Label
                             Grid.Row="1"
                             Grid.Column="1"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="End"
                             Text="{Binding TaxAmount, StringFormat='{0:C}'}" />
-                        <Border
+                        <!--<Border
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
                             Stroke="Maroon"
                             StrokeDashArray="20,5"
-                            StrokeThickness="0.5" />
+                            StrokeThickness="0.5" />-->
+                        <BoxView
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            Color="Black" />
+
+                        <!--<Line
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Stroke="Black"
+                            StrokeThickness="1"
+                            X1="0"
+                            X2="100"
+                            Y1="0"
+                            Y2="0" />-->
 
                         <Label
                             Grid.Row="3"
                             Grid.Column="0"
-                            FontAttributes="Bold"                           
+                            FontAttributes="Bold"
                             Text="Total" />
                         <Label
                             Grid.Row="3"
                             Grid.Column="1"
                             FontAttributes="Bold"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="End"
                             Text="{Binding Total, StringFormat='{0:C}'}" />
-                        <Border
+                        <!--<Border
                             Grid.Row="4"
                             Grid.ColumnSpan="2"
                             Stroke="Maroon"
                             StrokeDashArray="20,5"
-                            StrokeThickness="0.5" />
+                            StrokeThickness="0.5" />-->
+                        <BoxView
+                            Grid.Row="4"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            Color="Black" />
 
                         <Grid
                             Grid.Row="5"

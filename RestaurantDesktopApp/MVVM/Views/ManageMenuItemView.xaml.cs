@@ -32,4 +32,9 @@ public partial class ManageMenuItemView : ContentPage
     {
         await _manageMenuItemsViewModel.SaveMenuItemCommand.ExecuteAsync(menuItemModel);
     }
+
+    private async void SaveMenuItemControl_OnDelete(Models.MenuItemModel menuItemModel)
+    {
+        await _manageMenuItemsViewModel.DeleteMenuItemCommand.ExecuteAsync(menuItemModel);
+    }
 }

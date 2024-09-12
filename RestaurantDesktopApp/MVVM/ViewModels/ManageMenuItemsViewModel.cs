@@ -205,6 +205,33 @@ namespace RestaurantDesktopApp.MVVM.ViewModels
             IsBusy = false;
         }
 
+
+        [RelayCommand]
+        private async Task DeleteMenuItemAsync(MenuItemModel model)
+        {
+            IsBusy = true;
+
+            var errorMessage = await _databaseService.DeleteMenuItemAsync(model);
+
+            if (errorMessage != null)
+            {
+                await Shell.Current.DisplayAlert("Error", errorMessage, "Ok");
+            }
+            else
+            {
+                await Toast.Make("Producto eliminado exitosamente").Show();
+               
+                MenuItems = [.. MenuItems.Where(x => x.Id != model.Id)];
+                
+                //Send the deleted menu item to the other parts of the App
+                WeakReferenceMessenger.Default.Send(MenuItemDeletedMessage.From(model));
+
+                Cancel();
+            }
+
+            IsBusy = false;
+        }
+
         private void HandleMenuItemChanged(MenuItemModel model)
         {
             var menuItem = MenuItems.FirstOrDefault(x => x.Id == model.Id);

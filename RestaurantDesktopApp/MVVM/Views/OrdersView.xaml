@@ -29,15 +29,15 @@
         <Grid
             Grid.Column="0"
             Padding="15"
-            RowDefinitions="Auto, Auto, *"
-            RowSpacing="15">
+            RowDefinitions="Auto, *"
+            RowSpacing="15"
+             BackgroundColor="White">
             <Label
                 Grid.Row="0"
                 FontAttributes="Bold"
                 FontSize="22"
                 Text="Pedidos" />
             <Grid Grid.Row="1">
-
                 <Grid RowDefinitions="30,*">
                     <Grid BackgroundColor="Maroon" ColumnDefinitions="*,*,*,*,*,*">
                         <Label
@@ -114,6 +114,7 @@
                                     <Button
                                         Grid.Row="1"
                                         Grid.Column="5"
+                                        Margin="0,0,0,5"
                                         BackgroundColor="DarkOliveGreen"
                                         Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:OrdersViewModel}}, Path=SelectOrderCommand}"
                                         CommandParameter="{Binding .}"
@@ -129,7 +130,6 @@
                                         HeightRequest="1"
                                         Color="LightGray" />
                                 </Grid>
-
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

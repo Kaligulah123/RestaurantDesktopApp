@@ -94,10 +94,10 @@
         {
             return new List<MenuItem>
             {
-                new MenuItem { Id = 1, Name = "Cerveza", Icon = "cerveza.png", Description = "Cerveza fría", Price = 4.99m },
-                new MenuItem { Id = 2, Name = "Biryani", Icon = "biryani.png", Description = "Biryani de pollo picante", Price = 7.99m },
+                new MenuItem { Id = 1, Name = "Cerveza", Icon = "cerveza.png", Description = "Cerveza fría", Price = 4.99m },               
+                new MenuItem { Id = 2, Name = "Pescado Frito", Icon = "pescado_patatas.png", Description = "Pescado crujiente con patatas fritas", Price = 6.99m },
                 new MenuItem { Id = 3, Name = "Panecillos", Icon = "panecillos.png", Description = "Panecillos recién horneados", Price = 2.99m },
-                new MenuItem { Id = 4, Name = "Combo de Hamburguesa y Papas Fritas", Icon = "hamburguesa.png", Description = "Hamburguesa con papas fritas", Price = 5.99m },
+                new MenuItem { Id = 4, Name = "Combo de Hamburguesa y Patatas Fritas", Icon = "hamburguesa.png", Description = "Hamburguesa con patatas fritas", Price = 5.99m },
                 new MenuItem { Id = 5, Name = "Pastel", Icon = "pastel.png", Description = "Delicioso pastel de chocolate", Price = 3.99m },
                 new MenuItem { Id = 6, Name = "Chocolate", Icon = "chocolate.png", Description = "Barra de chocolate rico", Price = 1.99m },
                 new MenuItem { Id = 7, Name = "Cóctel", Icon = "cocktail.png", Description = "Cóctel refrescante", Price = 6.99m },
@@ -106,9 +106,9 @@
                 new MenuItem { Id = 10, Name = "Donut", Icon = "donut.png", Description = "Donut glaseado", Price = 1.49m },
                 new MenuItem { Id = 11, Name = "Bebida Energética", Icon = "bebida_energetica.png", Description = "Bebida energética", Price = 2.99m },
                 new MenuItem { Id = 12, Name = "Comida Rápida", Icon = "comida_rapida.png", Description = "Comida rápida y sabrosa", Price = 5.99m },
-                new MenuItem { Id = 13, Name = "Pescado con Papas Fritas", Icon = "pescado_patatas.png", Description = "Pescado crujiente con papas fritas", Price = 6.99m },
+                new MenuItem { Id = 13,Name = "Biryani", Icon = "biryani.png", Description = "Biryani de pollo picante", Price = 7.99m },
                 new MenuItem { Id = 14, Name = "Pescado", Icon = "pescado_parrilla.png", Description = "Pescado a la parrilla", Price = 7.99m },
-                new MenuItem { Id = 15, Name = "Papas Fritas", Icon = "patatas_fritas.png", Description = "Papas fritas crujientes", Price = 2.99m },
+                new MenuItem { Id = 15, Name = "Patatas Fritas", Icon = "patatas_fritas.png", Description = "Patatas fritas crujientes", Price = 2.99m },
                 new MenuItem { Id = 16, Name = "Pollo Frito", Icon = "pollo_frito.png", Description = "Pollo frito crujiente", Price = 5.99m },
                 new MenuItem { Id = 17, Name = "Huevo Frito", Icon = "huevo_frito.png", Description = "Huevo frito a la plancha", Price = 1.49m },
                 new MenuItem { Id = 18, Name = "Arroz Frito", Icon = "arroz_frito.png", Description = "Arroz frito sabroso", Price = 4.99m },

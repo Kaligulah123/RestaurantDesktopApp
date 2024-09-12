@@ -13,7 +13,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using System.Reflection;
 namespace RestaurantDesktopApp.MVVM.ViewModels
 {
-    public partial class MainPageViewModel : ObservableObject, IRecipient<MenuItemChangedMessage>
+    public partial class MainPageViewModel : ObservableObject, IRecipient<MenuItemChangedMessage>, IRecipient<MenuItemDeletedMessage>
     {
         //Campos
         #region Campos
@@ -69,6 +69,9 @@ namespace RestaurantDesktopApp.MVVM.ViewModels
             CartItems.CollectionChanged += CartItems_CollectionChanged;
 
             WeakReferenceMessenger.Default.Register<MenuItemChangedMessage>(this);
+
+            // Registro para recibir mensajes de eliminación de MenuItem
+            WeakReferenceMessenger.Default.Register<MenuItemDeletedMessage>(this);
 
             WeakReferenceMessenger.Default.Register<NameChangedMessage>(this, (recipient, message) => Name = message.Value);
 
@@ -178,6 +181,19 @@ namespace RestaurantDesktopApp.MVVM.ViewModels
             }
         }
 
+        public void Receive(MenuItemDeletedMessage message)
+        {
+            var model = message.Value;
+
+            MenuItems = [.. MenuItems.Where(x => x.Id != model.Id)];
+
+            var itemToRemove = CartItems.FirstOrDefault(x => x.ItemId == model.Id);
+
+            if (itemToRemove != null)
+            {
+                CartItems.Remove(itemToRemove);
+            }            
+        }
 
         #endregion
 
@@ -310,16 +326,24 @@ namespace RestaurantDesktopApp.MVVM.ViewModels
 
             //Estas dos lineas son lo mismo
             //await _ordersViewModel.PlaceOrderAsync(CartItems.ToArray(), isPaid);
-            if(await _ordersViewModel.PlaceOrderAsync([.. CartItems], isPaid))
+            if (await _ordersViewModel.PlaceOrderAsync([.. CartItems], isPaid))
             {
                 //Order creation succesfull
                 CartItems.Clear();
+
+                IsBusy = false;
+
+                WeakReferenceMessenger.Default.Send(new ShowOrderMessage(true));
             }
 
             IsBusy = false;
+
+           
         }
 
-        
+
+
+
 
 
         #endregion

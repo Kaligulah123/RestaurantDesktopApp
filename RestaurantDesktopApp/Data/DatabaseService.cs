@@ -231,6 +231,51 @@ namespace RestaurantDesktopApp.Data
             }
         }
 
+        public async Task<string?> DeleteMenuItemAsync(MenuItemModel model)
+        {
+            string? errorMessage = null;
+
+            // Verificar que el MenuItem tiene un Id válido antes de intentar eliminarlo
+            if (model.Id > 0)
+            {
+                // Crear el objeto para eliminar el MenuItem
+                MenuItem menuItem = new()
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    Icon = model.Icon,
+                    Price = model.Price
+                };
+
+                // Eliminar el MenuItem de la base de datos
+                if (await _connection.DeleteAsync(menuItem) > 0)
+                {
+                    // Obtener todos los mapeos de categorías asociados al MenuItem que estamos eliminando
+                    var categoryMappings = await _connection.Table<MenuItemCategoryMapping>()
+                                                   .Where(x => x.MenuItemId == menuItem.Id)
+                                                   .ToListAsync();
+
+                    // Eliminar los mapeos de la base de datos
+                    foreach (var mapping in categoryMappings)
+                    {
+                        await _connection.DeleteAsync(mapping);
+                    }
+
+                    return null; // Éxito, no hay error
+                }
+
+                return "Error al borrar el menu item";
+            }           
+            else
+            {
+                errorMessage = "El producto no tiene un Id válido para eliminar.";
+            }
+
+            return errorMessage;
+        }
+        
+
         public async ValueTask DisposeAsync()
         {
             if (_connection != null)

@@ -15,6 +15,7 @@
         <Grid
             Grid.Column="0"
             Padding="15"
+            BackgroundColor="White"
             RowDefinitions="Auto, Auto, *"
             RowSpacing="15">
             <Label
@@ -26,7 +27,8 @@
             <controls:CategoriesListControl
                 Grid.Row="1"
                 Categories="{Binding Categories}"
-                OnCategorySelected="CategoriesListControl_OnCategorySelected" />
+                OnCategorySelected="CategoriesListControl_OnCategorySelected" 
+                MaximumHeightRequest="40"/>
 
             <Grid Grid.Row="2">
 
@@ -72,7 +74,11 @@
                 Grid.Row="1"
                 Padding="10"
                 BackgroundColor="{StaticResource LightWheat}">
-                <controls:SaveMenuItemControl Item="{Binding MenuItem}" OnCancel="SaveMenuItemControl_OnCancel" OnSaveItem="SaveMenuItemControl_OnSaveItem"/>
+                <controls:SaveMenuItemControl
+                    Item="{Binding MenuItem}"
+                    OnCancel="SaveMenuItemControl_OnCancel"
+                    OnDelete="SaveMenuItemControl_OnDelete"
+                    OnSaveItem="SaveMenuItemControl_OnSaveItem" />
                 <!--<CollectionView ItemsSource="{Binding CartItems}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="2" Orientation="Vertical" />

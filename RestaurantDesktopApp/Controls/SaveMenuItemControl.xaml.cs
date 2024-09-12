@@ -139,6 +139,13 @@ public partial class SaveMenuItemControl : ContentView
 
         static async Task ErrorAlertAsync(string message) => await Shell.Current.DisplayAlert("Error de validación", message, "Ok");
 
+    }
 
+    public event Action<MenuItemModel> OnDelete;
+
+    [RelayCommand]
+    private async void Delete()
+    {
+        if (await Shell.Current.DisplayAlert("¡ATENCIÓN!", "¿Seguro que quiere eliminar de la lista el producto seleccionado?", "SI", "NO")) OnDelete?.Invoke(Item);        
     }
 }

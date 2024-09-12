@@ -1,4 +1,6 @@
-﻿using RestaurantDesktopApp.MVVM.ViewModels;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using RestaurantDesktopApp.MVVM.Models;
+using RestaurantDesktopApp.MVVM.ViewModels;
 using MenuItem = RestaurantDesktopApp.Data.MenuItem;
 
 namespace RestaurantDesktopApp.MVVM.Views
@@ -20,6 +22,11 @@ namespace RestaurantDesktopApp.MVVM.Views
             BindingContext = _mainPageViewModel;
 
             Initialize();
+
+            WeakReferenceMessenger.Default.Register<ShowOrderMessage>(this, async (recipient, message) =>
+            {
+                await ShowTemporaryMessage();
+            });
         }
 
         protected override async void OnSizeAllocated(double width, double height)
@@ -43,6 +50,18 @@ namespace RestaurantDesktopApp.MVVM.Views
         {
             _mainPageViewModel.AddToCartCommand.Execute(menuItem);
         }
+
+        public async Task ShowTemporaryMessage()
+        {
+            // Aparecer el texto (opacidad de 0 a 1)
+            await MessageLabel.FadeTo(1, 300);
+          
+            await Task.Delay(1000);
+
+            // Desaparecer el texto progresivamente (opacidad de 1 a 0)
+            await MessageLabel.FadeTo(0, 300);
+        }
+               
     }
 
 }

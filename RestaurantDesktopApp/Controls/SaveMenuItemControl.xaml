@@ -115,19 +115,29 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </VerticalStackLayout>
-            <Grid ColumnDefinitions="*,*">
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*" RowSpacing="10">
                 <Button
                     Grid.Column="0"
                     BackgroundColor="Red"
                     Command="{Binding CancelCommand}"
                     HorizontalOptions="Start"
-                    Text="Cancelar" />
+                    Text="Cancelar"
+                    WidthRequest="150" />
                 <Button
                     Grid.Column="1"
                     BackgroundColor="DarkOliveGreen"
                     Command="{Binding SaveMenuItemCommand}"
                     Text="Guardar" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="DarkOrange"
+                    Command="{Binding DeleteCommand}"
+                    HorizontalOptions="Start"
+                    Text="Eliminar"                   
+                    WidthRequest="150" />
             </Grid>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentView>
