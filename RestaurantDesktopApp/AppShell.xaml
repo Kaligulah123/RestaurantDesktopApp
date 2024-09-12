@@ -4,9 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RestaurantDesktopApp"
-    xmlns:views="clr-namespace:RestaurantDesktopApp.MVVM.Views"
-    Title="RestaurantDesktopApp"
-    Shell.FlyoutBackgroundColor="Wheat"
+    xmlns:views="clr-namespace:RestaurantDesktopApp.MVVM.Views"    
+    Shell.FlyoutBackgroundColor="{StaticResource LightWheat}"
     Shell.FlyoutBehavior="Locked"
     Shell.FlyoutWidth="60">
 
@@ -25,16 +24,20 @@
     <ShellContent
         Title="ManageMenuItem"
         ContentTemplate="{DataTemplate views:ManageMenuItemView}"
-        Icon="grid_alt_regular_24.png"
+        Icon="setting_regular_24.png"
         Route="ManageMenuItem" />
 
     <Shell.FlyoutFooter>
-        <Image Source="phone_solid_24.png"
+        <Image Source="contact_solid_24.png"
                HeightRequest="20"
                WidthRequest="20"
                HorizontalOptions="Center"
                Aspect="AspectFit"
-               Margin="0,0,0,25"/>
+               Margin="0,0,0,25">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Image.GestureRecognizers>
+        </Image>
     </Shell.FlyoutFooter>
 
 </Shell>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="RestaurantDesktopApp.Controls.HelpPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:RestaurantDesktopApp.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="this"
+    CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <Border
+        BackgroundColor="Wheat"
+        Stroke="Maroon"
+        StrokeShape="RoundRectangle 10">
+        <Border.Shadow>
+            <Shadow />
+        </Border.Shadow>
+        <VerticalStackLayout>
+            <Grid
+                Padding="15,8"
+                BackgroundColor="Maroon"
+                ColumnDefinitions="*,Auto">
+                <Label
+                    Grid.Column="0"
+                    FontSize="18"
+                    Text="¿Necesita ayuda?"
+                    TextColor="White" />
+                <Label
+                    Grid.Column="1"
+                    BackgroundColor="Red"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HeightRequest="25"
+                    HorizontalTextAlignment="Center"
+                    Text="X"
+                    TextColor="White"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="25">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CloseLabel_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <VerticalStackLayout Padding="15" Spacing="10">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Center"
+                    Source="contact_solid_24.png"
+                    WidthRequest="25" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="Puede contactarnos a través de:" />
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Label
+                        FontSize="16"
+                        Text="Email"
+                        VerticalOptions="Center" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="{x:Static controls:HelpPopup.Email}"
+                        TextDecorations="Underline"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="copyEmailLabel"
+                        Padding="8,2"
+                        BackgroundColor="yellow"
+                        Text="Copiar"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="CopyEmail_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Label
+                        FontSize="16"
+                        Text="Telefono"
+                        VerticalOptions="Center" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="{x:Static controls:HelpPopup.Phone}"
+                        TextDecorations="Underline"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="copyPhoneLabel"
+                        Padding="8,2"
+                        BackgroundColor="yellow"
+                        Text="Copiar"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="CopyPhone_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+
+</toolkit:Popup>

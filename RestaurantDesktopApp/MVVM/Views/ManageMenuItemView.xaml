@@ -1,12 +1,180 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RestaurantDesktopApp.MVVM.Views.ManageMenuItemView"
-             Title="ManageMenuItemView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="RestaurantDesktopApp.MVVM.Views.ManageMenuItemView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:RestaurantDesktopApp.Controls"
+    xmlns:data="clr-namespace:RestaurantDesktopApp.Data"
+    xmlns:models="clr-namespace:RestaurantDesktopApp.MVVM.Models"
+    xmlns:viewmodels="clr-namespace:RestaurantDesktopApp.MVVM.ViewModels"
+    x:DataType="viewmodels:ManageMenuItemsViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid ColumnDefinitions=".75*, .25*">
+
+        <Grid
+            Grid.Column="0"
+            Padding="15"
+            RowDefinitions="Auto, Auto, *"
+            RowSpacing="15">
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="22"
+                Text="Editar Productos" />
+
+            <controls:CategoriesListControl
+                Grid.Row="1"
+                Categories="{Binding Categories}"
+                OnCategorySelected="CategoriesListControl_OnCategorySelected" />
+
+            <Grid Grid.Row="2">
+
+                <controls:MenuItemsListControl
+                    IsEditCase="True"
+                    Items="{Binding MenuItems}"
+                    OnSelectItem="MenuItemsListControl_OnSelectItem" />
+
+                <BoxView
+                    HorizontalOptions="Fill"
+                    IsVisible="{Binding IsBusy}"
+                    Opacity="0.5"
+                    VerticalOptions="Fill"
+                    Color="{StaticResource LightWheat}" />
+                <ActivityIndicator
+                    HeightRequest="25"
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding IsBusy}"
+                    VerticalOptions="Center"
+                    WidthRequest="25"
+                    Color="Maroon" />
+
+            </Grid>
+        </Grid>
+
+        <Grid
+            Grid.Column="1"
+            Padding="0,10"
+            BackgroundColor="{StaticResource LightWheat}"
+            RowDefinitions="Auto, *">
+            <VerticalStackLayout
+                Grid.Row="0"
+                Padding="10,0"
+                Spacing="5">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="25"
+                    Text="Guardar Producto" />
+                <controls:CurrentDateTimeControl />
+            </VerticalStackLayout>
+
+            <Grid
+                Grid.Row="1"
+                Padding="10"
+                BackgroundColor="{StaticResource LightWheat}">
+                <controls:SaveMenuItemControl Item="{Binding MenuItem}" OnCancel="SaveMenuItemControl_OnCancel" OnSaveItem="SaveMenuItemControl_OnSaveItem"/>
+                <!--<CollectionView ItemsSource="{Binding CartItems}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="2" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CartModel">
+                            <Grid>
+                                <Border Padding="5" BackgroundColor="{StaticResource LightWheat}">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10" />
+                                    </Border.StrokeShape>
+                                    <Grid ColumnDefinitions="60,*" ColumnSpacing="10">
+                                        <Border
+                                            Grid.Column="0"
+                                            BackgroundColor="LightGray"
+                                            HeightRequest="60"
+                                            StrokeShape="RoundRectangle 5"
+                                            WidthRequest="60">
+                                            <Image
+                                                Aspect="AspectFit"
+                                                HeightRequest="60"
+                                                Source="{Binding Icon}"
+                                                WidthRequest="60" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Name}" />
+                                            <Grid ColumnDefinitions="Auto, *">
+                                                <Label
+                                                    Grid.Column="0"
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    Text="{Binding Price, StringFormat='{0:C}'}"
+                                                    TextColor="Maroon" />
+                                                <Grid
+                                                    Grid.Column="1"
+                                                    HorizontalOptions="End"
+                                                    WidthRequest="120">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <ImageButton
+                                                        Grid.Column="0"
+                                                        Padding="5"
+                                                        BackgroundColor="Yellow"
+                                                        Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}}, Path=DecreaseQuantityCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        CornerRadius="5"
+                                                        Source="minus_regular_24.png" />
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Padding="5"
+                                                        BackgroundColor="White"
+                                                        FontSize="18"
+                                                        HeightRequest="30"
+                                                        HorizontalOptions="Center"
+                                                        HorizontalTextAlignment="Center"
+                                                        Text="{Binding Quantity}"
+                                                        TextColor="Maroon"
+                                                        VerticalTextAlignment="Center"
+                                                        WidthRequest="60" />
+                                                    <ImageButton
+                                                        Grid.Column="2"
+                                                        Padding="5"
+                                                        BackgroundColor="Yellow"
+                                                        Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}}, Path=IncreaseQuantityCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        CornerRadius="5"
+                                                        Source="plus_regular_24.png" />
+                                                </Grid>
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+
+                                <ImageButton
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}}, Path=RemoveItemFromCartCommand}"
+                                    CommandParameter="{Binding .}"
+                                    CornerRadius="5"
+                                    HorizontalOptions="End"
+                                    MinimumHeightRequest="25"
+                                    MinimumWidthRequest="25"
+                                    Source="x_regular_24.png"
+                                    ToolTipProperties.Text="Eliminar producto"
+                                    VerticalOptions="Start">
+                                    <ImageButton.Shadow>
+                                        <Shadow Brush="red" />
+                                    </ImageButton.Shadow>
+                                </ImageButton>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>-->
+            </Grid>
+
+        </Grid>
+
+    </Grid>
 </ContentPage>
